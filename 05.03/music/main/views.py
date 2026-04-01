@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse,HttpResponseRedirect
-from .models import Janri,Track
+from .models import Janri,Track, Artist
 from django.shortcuts import render
-from .forms import AddForm, AddFormTracks
+from .forms import AddForm, AddFormTracks, ArtistForm
 # from .models import Track
 # Create your views here.
 def main(request):
@@ -49,10 +49,38 @@ def edite(request,id_genres):
         return render(request, "edit.html", {'form': genreform})
 
     
+def artists(request):
+    a = Artist.objects.all()
+    return render (request, 'artists.html', {'artists':a})
 
+def add_artist(request):
+    if request.method == "POST":
+        # Передаем не только текст (POST), но и файлы/картинки (FILES)
+        form = ArtistForm(request.POST, request.FILES) 
+        if form.is_valid():
+            form.save()
+            return redirect('/artists/') # После сохранения идем к списку артистов
+    else:
+        form = ArtistForm()
+        
+    return render(request, "add_artist.html", {'form': form})
+def editartist(request, id_artist):
+    artist = Artist.objects.get(id=id_artist)
 
+    if request.method == "POST":
+        form = ArtistForm(request.POST, request.FILES, instance=artist)
+        if form.is_valid():
+            form.save()
+            return redirect('/artists/') # Возвращаем к списку артистов
+    else:
+        form = ArtistForm(instance=artist)
+        
+    return render(request, "edit.html", {'form': form})
 
-
+def deleteartist(request, id_artist):
+    artist = Artist.objects.get(id=id_artist)
+    artist.delete()    # Делаем так же, как у вас было в удалении жанров и треков
+    return HttpResponse('<h1>Исполнитель успешно удален</h1><br><a href="/artists/">Вернуться к списку</a>')
 
 
 def delete_track(request,id_genres):
@@ -75,14 +103,16 @@ def add_track(request):
         trackform = AddFormTracks()
         return render(request, "add_genre.html", {'form': trackform})
 
-def edite_track(request,id_genres):
-    g = Janri.objects.get(id=id_genres)
+def edite_track(request, id_genres):
+    track = Track.objects.get(id=id_genres)
 
     if request.method == "POST":
-        genre = AddForm (request.POST, instance=g)
-        if genre.is_valid():
-            genre.save()
-        return redirect('/janri/')
+        form = AddFormTracks(request.POST, instance=track)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('/Tracks/')
     else:
-        trackform = AddForm(instance=g)
-        return render(request, "edit.html", {'form': trackform})
+        form = AddFormTracks(instance=track)
+        
+    return render(request, "edit.html", {'form': form})

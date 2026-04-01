@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить исполнителя</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <div id="menu">
+                <a href="/">Главная</a>
+                <a href="/janri/">Жанры музыки</a>
+                <a href="/Tracks/">Треки</a>
+                <a href="/artists/">Исполнители</a>
+            </div>
+        </div>
+        <div id="container">
+            <div id="content">
+                <h2>Добавление нового исполнителя</h2>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Сохранить</button>
+                </form>
+                
+                <br>
+                <a href="/artists/">Назад к списку</a>
+            </div>
+        </div>
+        <div id="footer">
+            footer
+        </div>
+    </div>
+</body>
+</html>

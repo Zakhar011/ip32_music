@@ -14,6 +14,7 @@
 	<a href="/">Главная</a>
 	<a href="/janri/" >Жанры музыки</a>
 	<a href="/Tracks/">Треки</a>
+    <a href="/artists/">Исполнители</a>
 </div>
 	</div>
 	<div id="container">
@@ -30,11 +31,11 @@
                         </tr>
                         </thead>
             <tbody>
-                {% for a in artsts %}
+                {% for a in artists %}
                 <tr>
                     <td>{{a.id}}</td>
                     <td>{{a.name}}</td>
-                    <td><img class="artist_logo" src="/media/a{{a.image}}" alt=""></td>
+                    <td><img class="artist_logo" src="/media/{{a.image.url}}" alt=""></td>
                     <td><a href="/editartist/{{a.id}}">Редактировать</a></td>
                     <td><a href="/deleteartist/{{a.id}}">Удалить</a></td>
                 </tr>

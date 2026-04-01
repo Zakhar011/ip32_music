@@ -14,6 +14,7 @@
 	<a href="/">Главная</a>
 	<a href="/janri/" >Жанры музыки</a>
     <a href="/Tracks/">Треки</a>
+    <a href="/artists/">Исполнители</a>
 </div>
 	</div>
 	<div id="container">
@@ -41,13 +42,14 @@
                         {% for g in t.genres.all %}
                             {{g.name_en}},
                             {% endfor %}
-                    <td><a href="/edite/{{t.id}}">Редактировать</a></td>
+                    </td>
+                    <td><a href="/edite_track/{{t.id}}">Редактировать</a></td>
                     <td><a href="/delete_track/{{t.id}}">Удалить</a></td>    
                 </tr>
                 {% endfor %}    
             </tbody>       
             </table> 
-            <a href="/add_track/">Добавить жанр</a>  
+            <a href="/add_track/">Добавить трек</a>  
 		</div>
 	</div>
 	<div id="footer">
