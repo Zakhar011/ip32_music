@@ -1,5 +1,5 @@
 from django import forms
-from .models import Janri,Track
+from .models import Janri,Track, Artist
  
 class AddForm(forms.ModelForm):
     class Meta:
@@ -20,3 +20,11 @@ class AddFormTracks(forms.ModelForm):
             'duration': 'Длительность',
             'name_en': 'Жанр',
         }
+class ArtistForm(forms.ModelForm):
+    class Meta:
+        model=Artist
+        fields = '__all__'
+        labels = {
+            'name': 'Имя/название',
+            'image': 'Фотография',
+        }        
