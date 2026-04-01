@@ -18,9 +18,22 @@
 </div>
 	</div>
 	<div id="container">
-		
+		<table>
 		<div id="content">
-			<table>
+			
+                <form method="post">
+    {% csrf_token %}
+    
+    <select name="artist" onchange="this.form.submit()">
+        <option value="">Все исполнители</option>
+        
+        {% for artist_item in artists %}
+            <option value="{{ artist_item.id }}" {% if artist_item == current_artist %}selected{% endif %}>
+                {{ artist_item.name }}
+            </option>
+        {% endfor %}
+    </select>
+</form>
                 <thead>
                     <tr>
                         <th>№</th>
@@ -32,7 +45,7 @@
                         </tr>
                         </thead>
             <tbody>
-                {% for t in Tracks %}
+                {% for t in tracks %}
                 <tr>
                     <td>{{t.id}}</td>
                     <td>{{t.title}}</td>

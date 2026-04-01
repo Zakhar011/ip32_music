@@ -13,8 +13,17 @@ def genres(request):
     return render(request, 'genres.html',{'janri':janri})
 
 def tracks(request):
-    Tracks = Track.objects.all()
-    return render(request, 'tracks.html',{'Tracks':Tracks})
+    t = Track.objects.all()
+    
+    a = Artist.objects.all()
+    artist = None
+    if request.method == "POST":
+        id_artist = request.POST.get('artist')
+        if id_artist: 
+            artist = Artist.objects.get(id=id_artist)
+            t = Track.objects.filter(artist=artist)
+
+    return render(request, 'tracks.html', {'tracks': t, 'artists': a, 'current_artist': artist})
 
 def deleteop(request,id_genres):
     genres = Janri.objects.get(id=id_genres)
