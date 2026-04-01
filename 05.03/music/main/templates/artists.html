@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>spotify</title>
+    <link rel="stylesheet" href="{% static "styles.css" %}" />
+</head>
+<body>
+    <div id="wrapper">
+	<div id="header">
+		<div id="menu">
+	<a href="/">Главная</a>
+	<a href="/janri/" >Жанры музыки</a>
+	<a href="/Tracks/">Треки</a>
+</div>
+	</div>
+	<div id="container">
+		
+		<div id="content">
+			<table>
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Название</th>
+                        <th>фото</th>
+                        <th></th>
+                        <th></th>
+                        </tr>
+                        </thead>
+            <tbody>
+                {% for a in artsts %}
+                <tr>
+                    <td>{{a.id}}</td>
+                    <td>{{a.name}}</td>
+                    <td><img class="artist_logo" src="/media/a{{a.image}}" alt=""></td>
+                    <td><a href="/editartist/{{a.id}}">Редактировать</a></td>
+                    <td><a href="/deleteartist/{{a.id}}">Удалить</a></td>
+                </tr>
+                {% endfor %}    
+            </tbody>       
+            </table>
+            <a href="/add_artist/">Добавить исполнителя</a>
+		</div>
+	</div>
+	<div id="footer">
+		footer
+	</div>
+</div>
+</body>
+</html>
