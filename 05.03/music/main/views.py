@@ -79,7 +79,7 @@ def editartist(request, id_artist):
 
 def deleteartist(request, id_artist):
     artist = Artist.objects.get(id=id_artist)
-    artist.delete()    # Делаем так же, как у вас было в удалении жанров и треков
+    artist.delete()
     return HttpResponse('<h1>Исполнитель успешно удален</h1><br><a href="/artists/">Вернуться к списку</a>')
 
 
