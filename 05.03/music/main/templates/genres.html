@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>spotify</title>
+    <link rel="stylesheet" href="{% static "styles.css" %}" />
+</head>
+<body>
+    <div id="wrapper">
+	<div id="header">
+		<div id="menu">
+	<a href="/">Главная</a>
+	<a href="/janri/" >Жанры музыки</a>
+	<a href="/Tracks/">Треки</a>
+</div>
+	</div>
+	<div id="container">
+		
+		<div id="content">
+			<table>
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Название</th>
+                        <th>Название на англ.</th>
+                        <th>Описание</th>
+                        <th></th>
+                        <th></th>
+                        </tr>
+                        </thead>
+            <tbody>
+                {% for g in janri %}
+                <tr>
+                    <td>{{g.id}}</td>
+                    <td>{{g.name_ru}}</td>
+                    <td>{{g.name_en}}</td>
+                    <td>{{g.description}}</td>
+                    <td><a href="/edite/{{g.id}}">Редактировать</a></td>
+                    <td><a href="/deleteop/{{g.id}}">Удалить</a></td>
+                </tr>
+                {% endfor %}    
+            </tbody>       
+            </table>
+            <a href="/add_genre/">Добавить жанр</a>
+		</div>
+	</div>
+	<div id="footer">
+		footer
+	</div>
+</div>
+</body>
+</html>
